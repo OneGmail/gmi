@@ -1,0 +1,631 @@
+@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&display=swap");
+
+/* CSS Variables */
+:root {
+    --bg-color: #0d0d0d;
+    --text-color: #f0f0f0;
+    --accent-color: #ffcc00;
+    --container-bg: #1a1a1a;
+    --shadow-color: rgba(255, 204, 0, 0.4);
+    --scrollbar-color: rgba(255, 204, 0, 0.6);
+    --scrollbar-hover: #ffaa00;
+    --button-bg: #2a2a2a;
+    --button-hover: #3a3a3a;
+    --button-active: #4a4a4a;
+    --divider-color: rgba(255, 204, 0, 0.3);
+    --status-bg: #222;
+    --status-text: #ccc;
+}
+
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    scroll-behavior: smooth;
+}
+
+body {
+    /* font-family: "Orbitron", Arial, sans-serif; */
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    text-align: center;
+    overflow-x: hidden;
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Scrollbar Styles */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: var(--bg-color);
+    border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--scrollbar-color);
+    border-radius: 8px;
+    transition: background 0.3s;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--scrollbar-hover);
+}
+
+
+iframe::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+iframe::-webkit-scrollbar-thumb {
+    background: var(--scrollbar-color);
+    border-radius: 8px;
+    transition: background 0.3s;
+}
+
+/* Text Styles */
+h1, h2, h3, h4, h5, h6, p, span {
+    color: var(--text-color);
+    text-decoration: none;
+}
+
+/* Code Styles */
+code {
+    background: var(--button-bg);
+    color: var(--accent-color);
+    padding: 2px 6px;
+    border-radius: 5px;
+    font-family: "Courier New", monospace;
+    font-size: 0.95rem;
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+.nowrap {
+    white-space: nowrap;
+}
+
+/* Container */
+.container {
+    flex: 1;
+    width: 100%;
+    display: flex;
+    max-width: 1800px;
+    margin: 60px auto;
+    padding: 30px;
+    border-radius: 12px;
+    background: var(--container-bg);
+    border: 3px solid var(--accent-color);
+    box-shadow: 0 0 20px var(--shadow-color);
+    transition: transform 0.3s ease;
+    gap: 10px;
+}
+
+/* Task Container */
+.task-container {
+    /* flex: 1; */
+    display: flex;
+    gap: 20px;
+    width: 100%;
+}
+
+/* Sidebar */
+.course-sidebar {
+    width: 100px;
+    min-width: 100px;
+    background: var(--container-bg);
+    border: 3px solid var(--accent-color);
+    border-radius: 8px;
+    box-shadow: 0 0 20px var(--shadow-color);
+    padding: 10px;
+    position: relative;
+}
+
+.course-tab-title {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: var(--accent-color);
+}
+
+.course-theory-container {
+    position: relative;
+    min-height: 200px;
+}
+
+.course-theory-tabs {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+svg,
+.copy-icon {
+    width: 16px;
+    height: 16px;
+    fill: gray;
+    transition: fill 0.3s;
+}
+
+.course-theory-tabs li {
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    margin-bottom: 5px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
+}
+
+.course-theory-tabs li:hover {
+    background: var(--button-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px var(--shadow-color);
+}
+
+.course-tab__icon svg {
+    width: 18px;
+    height: 18px;
+    margin-right: 8px;
+    fill: var(--accent-color);
+    font-size: 0;
+}
+
+.course-tab__title {
+    font-size: 0.9rem;
+    color: var(--text-color);
+    font-weight: 400;
+}
+
+/* Vertical Tab (Modal Trigger) */
+.course-theory-tabs li.vertical-tab {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%) rotate(-90deg);
+    background: var(--button-bg);
+    border: 2px solid var(--accent-color);
+    border-radius: 5px;
+    padding: 5px 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    max-height: 60px;
+}
+
+.course-theory-tabs li.vertical-tab:hover {
+    background: var(--button-hover);
+    transform: translate(-50%, -50%) rotate(-90deg) translateY(-2px);
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    overflow: auto;
+}
+
+section {
+    text-align: left !important;
+}
+
+section pre {
+    text-align: left !important;
+    display: block;
+    margin-left: 0;
+    margin-right: auto;
+}
+
+
+
+
+.modal-content {
+    margin: 20px auto;
+    background: var(--container-bg);
+    /* margin: 10% auto; */
+    padding: 20px;
+    border: 3px solid var(--accent-color);
+    border-radius: 8px;
+    box-shadow: 0 0 20px var(--shadow-color);
+    width: 80%;
+    max-width: 700px;
+    position: relative;
+}
+
+.modal-close {
+    color: var(--accent-color);
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.modal-close:hover {
+    color: var(--scrollbar-hover);
+}
+
+/* Modal Theory Tabs */
+.modal .course-theory-tabs {
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.modal .course-theory-tabs li {
+    width: 100%;
+    justify-content: flex-start;
+    margin-bottom: 10px;
+}
+
+.modal .course-theory-tabs li:hover {
+    transform: none;
+}
+
+/* Task Column */
+.task-column {
+    flex: 1;
+    background: var(--container-bg);
+    border: 3px solid var(--accent-color);
+    border-radius: 8px;
+    box-shadow: 0 0 20px var(--shadow-color);
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    max-height: -webkit-fill-available;
+    height: 100%;
+}
+
+/* Course Tabs */
+.course-tabs {
+    list-style: none;
+    display: flex;
+    /* border-bottom: 1px solid var(--divider-color); */
+    margin-bottom: 15px;
+    gap: 10px
+}
+
+.tab-lang-edditor {
+    padding: 10px 15px;
+    cursor: pointer;
+    background: var(--button-bg);
+    border-bottom: 2px solid transparent;
+    transition: background 0.3s;
+    width: 100%;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+li.tab-lang-edditor:first-child {
+    /* border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px; */
+}
+
+li.tab-lang-edditor:not(.hidden):first-child {
+    /* border-top-left-radius: 8px; */
+    /* border-bottom-left-radius: 8px; */
+}
+
+li.tab-lang-edditor:not(.hidden):nth-last-child {
+    /* border-top-left-radius: 8px; */
+    /* border-bottom-left-radius: 8px; */
+}
+
+li.tab-lang-edditor:not(.hidden):last-child {
+    border-top-right-radius: 8px;
+    /* border-bottom-right-radius: 8px; */
+}
+
+/* li.tab-lang-edditor:not(:last-child) {
+    border-right: 1px solid var(--divider-color);
+} */
+
+.tab-lang-edditor:hover {
+    background: var(--button-hover);
+}
+
+.tab-lang-edditor.active {
+    background: var(--button-active);
+    border-bottom: 2px solid var(--accent-color);
+}
+
+.tab-lang-edditor .tb-lng {
+    font-size: 0.9rem;
+    color: var(--text-color);
+    font-weight: 400;
+}
+
+.tab-lang-edditor.active .tb-lng {
+    font-weight: 700;
+    color: var(--accent-color);
+}
+
+/* Task Input */
+.task-input {
+    flex: 1;
+    display: flex;
+}
+
+.task-input textarea {
+    width: 100%;
+    height: 100%;
+    border: 1px solid var(--divider-color);
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 1rem;
+    resize: none;
+    background: var(--bg-color);
+    color: var(--text-color);
+    /* font-family: "Orbitron", monospace; */
+    font-family: "Ubuntu Mono", "Menlo", "Monaco", "Consolas", "Courier New", monospace; 
+}
+
+.task-input textarea:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 8px var(--shadow-color);
+}
+
+/* Course Container */
+.course-container {
+    margin-bottom: 15px;
+    /* min-height: -webkit-fill-available; */
+    height: 100%;
+}
+
+/* Course Browser and Preview */
+.course-browser {
+    margin-bottom: 15px;
+    height: 100%;
+}
+
+#preview {
+    width: 100%;
+    /* height: 300px; */
+    border: 2px solid var(--accent-color);
+    border-radius: 5px;
+    box-shadow: 0 0 10px var(--shadow-color);
+    background: white;
+    height: -webkit-fill-available;
+}
+
+/* Task Section */
+.course-task-container {
+    background: var(--container-bg);
+    border: 3px solid var(--accent-color);
+    border-radius: 8px;
+    box-shadow: 0 0 20px var(--shadow-color);
+    padding: 15px;
+    height: auto;
+    min-height: 100px;
+    max-height: 200px;
+    overflow-y: auto;
+    min-height: 200px;
+}
+
+/* Task Title */
+.task-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.task-label {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--accent-color);
+}
+
+.task-counter {
+    font-size: 0.9rem;
+    color: var(--status-text);
+    background: var(--status-bg);
+    padding: 2px 8px;
+    border-radius: 12px;
+}
+
+/* Task Table */
+.task-table {
+    list-style: none;
+}
+
+.task-table li {
+    padding: 10px;
+    border-bottom: 1px solid var(--divider-color);
+    text-align: left;
+}
+
+.task-table li:last-child {
+    border-bottom: none;
+}
+
+.task-table span,
+.task-table a {
+    font-size: 1rem;
+    color: var(--text-color);
+}
+
+.hidden {
+    display: none;
+}
+
+.task.completed {
+    color: green;
+    text-decoration: none;
+}
+
+/* a#task-meta {
+    padding-left: 40px;
+}
+
+.task.completed::after {
+    content: "";
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 25px;
+    height: 25px;
+    background-color: green; 
+    mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 16 16"><path d="M13.485 1.929a1 1 0 0 1 0 1.414L6.343 10.485a1 1 0 0 1-1.414 0L2.515 8.07a1 1 0 1 1 1.414-1.414L6 8.727l6.071-6.071a1 1 0 0 1 1.414 0z"/></svg>') no-repeat center;
+    -webkit-mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 16 16"><path d="M13.485 1.929a1 1 0 0 1 0 1.414L6.343 10.485a1 1 0 0 1-1.414 0L2.515 8.07a1 1 0 1 1 1.414-1.414L6 8.727l6.071-6.071a1 1 0 0 1 1.414 0z"/></svg>') no-repeat center;
+    mask-size: contain;
+    -webkit-mask-size: contain;
+    background-size: contain;
+    pointer-events: none;
+} */
+
+.task.completed {
+    position: relative; /* Добавляем, чтобы ::after позиционировался относительно li */
+}
+
+#task-meta {
+    /* display: grid; */
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+}
+
+div#task-icon svg {
+    width: 60px;
+    height: 60px;
+    fill: var(--accent-color);
+}
+
+a#task-meta-1 {
+    display: flex;
+    gap: 10px;
+    flex-direction: row;
+    overflow: visible
+}
+
+/* .task.completed::after {
+    content: "";
+    position: absolute;
+    left: 10px; 
+    top: 50%;
+    transform: translateY(-140%);
+    width: 25px;
+    height: 25px;
+    background-color: var(--accent-color); 
+    mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 16 16"><path d="M13.485 1.929a1 1 0 0 1 0 1.414L6.343 10.485a1 1 0 0 1-1.414 0L2.515 8.07a1 1 0 1 1 1.414-1.414L6 8.727l6.071-6.071a1 1 0 0 1 1.414 0z"/></svg>') no-repeat center;
+    -webkit-mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 16 16"><path d="M13.485 1.929a1 1 0 0 1 0 1.414L6.343 10.485a1 1 0 0 1-1.414 0L2.515 8.07a1 1 0 1 1 1.414-1.414L6 8.727l6.071-6.071a1 1 0 0 1 1.414 0z"/></svg>') no-repeat center;
+    mask-size: contain;
+    -webkit-mask-size: contain;
+    background-size: contain;
+    pointer-events: none;
+}
+
+
+.task.failure::after {
+    content: "";
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-140%);
+    width: 25px;
+    height: 25px;
+    background-color: var(--accent-color);
+    mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M4.646 4.646a.5.5 0 011 0L8 7.293l2.354-2.647a.5.5 0 11.707.707L8.707 8l2.647 2.354a.5.5 0 01-.707.707L8 8.707l-2.354 2.647a.5.5 0 01-.707-.707L7.293 8 4.646 5.646a.5.5 0 010-.707z"/></svg>') no-repeat center;
+    -webkit-mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M4.646 4.646a.5.5 0 011 0L8 7.293l2.354-2.647a.5.5 0 11.707.707L8.707 8l2.647 2.354a.5.5 0 01-.707.707L8 8.707l-2.354 2.647a.5.5 0 01-.707-.707L7.293 8 4.646 5.646a.5.5 0 010-.707z"/></svg>') no-repeat center;
+    mask-size: contain;
+    -webkit-mask-size: contain;
+    background-size: contain;
+    pointer-events: none;
+} */
+
+.CodeMirror.cm-s-monokai.CodeMirror-wrap {
+    text-align: left;
+    width: 100%;
+    height: 100%;
+    max-height: 700px;
+    border: 1px solid var(--divider-color);
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 1rem;
+    resize: none;
+    background: var(--bg-color);
+    color: var(--text-color);
+    /* font-family: "Orbitron", monospace; */
+    font-family: "Ubuntu Mono", "Menlo", "Monaco", "Consolas", "Courier New", monospace;
+}
+
+/* Progress Bar */
+#progressbar {
+    height: 5px;
+    background-color: var(--accent-color);
+    width: 0;
+    transition: width 0.3s ease;
+    box-shadow: 0 0 10px var(--shadow-color);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .task-container {
+        flex-direction: column;
+    }
+
+    .course-sidebar {
+        width: 100%;
+        min-width: auto;
+        display: flex;
+        justify-content: center;
+    }
+
+    .course-theory-container {
+        position: static;
+        min-height: auto;
+    }
+
+    .course-theory-tabs {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .course-theory-tabs li.vertical-tab {
+        position: static;
+        transform: none;
+        max-height: none;
+        margin: 5px;
+    }
+
+    .modal-content {
+        margin: 20% auto;
+        width: 90%;
+    }
+
+    .task-column {
+        height: auto;
+    }
+
+    #preview {
+        height: 200px;
+    }
+
+    .course-task-container {
+        max-height: 150px;
+    }
+}

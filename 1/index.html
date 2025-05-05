@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta name="description" content="Личный сайт для демонстрации проектов и расписания.">
+    <title>Live Schedule</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.18/codemirror.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.18/theme/monokai.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.18/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.18/mode/htmlmixed/htmlmixed.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.18/mode/xml/xml.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.18/mode/javascript/javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.18/mode/css/css.min.js"></script>
+</head>
+<body>
+    <div id="progressbar" aria-hidden="true"></div>
+    <main class="container">
+        <div class="task-container">
+            <div class="course-sidebar">
+                <div class="course-theory-container">
+                    <ul class="course-theory-tabs">
+                        <li class="vertical-tab modal-trigger">
+                            <span class="course-tab__icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" aria-hidden="true">
+                                    <path d="M0 96C0 78.3 14.3 64 32 64l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 128C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 288c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32L32 448c-17.7 0-32-14.3-32-32s14.3-32 32-32l384 0c17.7 0 32 14.3 32 32z"/>
+                                </svg>
+                            </span>
+                            <span class="course-tab__title">Теория</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div id="theory-modal" class="modal">
+                <div class="modal-content">
+                    <span class="modal-close">×</span>
+                    <h2>Урок 1</h2>
+                    <p>Заголовки и абзацы</p>
+                    <ul class="course-theory-tabs">
+                        <li class="external">
+                            <span class="course-tab__icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" aria-hidden="true">
+                                    <path d="M0 96C0 78.3 14.3 64 32 64l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 128C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 288c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32L32 448c-17.7 0-32-14.3-32-32s14.3-32 32-32l384 0c17.7 0 32 14.3 32 32z"/>
+                                </svg>
+                            </span>
+                            <span class="course-tab__title">Теги <code>&lt;h1&gt;</code> – <code>&lt;h6&gt;</code></span>
+                        </li>
+                        <section>
+                            <!-- <h1>HTML-теги</h1> -->
+                            <div class="content-theory" id="content-theory">
+                            </div>
+                            <div class="course-theory__content-text">
+
+                                <h1>Что такое заголовки?</h1>
+                                <p class="title-description">
+                                    Заголовки в HTML используются для организации структуры текста на веб-странице.
+                                    Существуют 6 уровней заголовков:
+                                    <code>&lt;h1&gt;</code> — самый важный, <code>&lt;h6&gt;</code> — наименее важный.
+                                </p>
+                            
+                                <h2>🔍 Рекомендации:</h2>
+                                <p class="title-description">
+                                    На странице должен быть только один <code>&lt;h1&gt;</code> — главный заголовок страницы.<br>
+                                    Используйте <code>&lt;h2&gt;</code>, <code>&lt;h3&gt;</code> и т.д. для подзаголовков.
+                                </p>
+                            
+                                <h1>Что такое абзацы?</h1>
+                                <p class="title-description">
+                                    Абзац обозначается тегом <code>&lt;p&gt;</code> и используется для обычного текста.<br>
+                                    Абзацы помогают разбивать текст на логические части и автоматически получают отступы сверху и снизу.
+                                </p>
+                            
+                                <h1>Пример</h1>
+                                <p class="title-description">
+                                    <code>&lt;h1&gt;Добро пожаловать на мой сайт!&lt;/h1&gt;</code><br>
+                                    <code>&lt;p&gt;Это мой первый опыт работы с HTML. Надеюсь, вам понравится!&lt;/p&gt;</code>
+                                </p>
+                            </div>
+                            
+                        </section>
+                    </ul>
+                </div>
+            </div>
+            <div class="task-column">
+                <ul class="course-tabs">
+                    <li class="tab-lang-edditor active" type-lang="html">
+                        <span class="tb-lng">
+                            index.html
+                        </span>
+                    </li>
+                    <li class="tab-lang-edditor" type-lang="css">
+                        <span class="tb-lng">
+                            styles.css
+                        </span>
+                    </li>
+                    <li class="tab-lang-edditor hidden" type-lang="js">
+                        <span class="tb-lng">
+                            script.js
+                        </span>
+                    </li>
+                </ul>
+                <div class="task-input">
+                    <textarea name="input-data" id="input-data"></textarea>
+                </div>
+            </div>
+            <div class="task-column">
+                <div class="course-container">
+                    <div class="course-browser">
+                        <iframe id="preview" title="Превью кода"></iframe>
+                    </div>
+                </div>
+                <div class="course-task-container">
+                    <div class="task-title">
+                        <span class="task-label">Задачи</span>
+                        <span class="task-counter">(Выполнено 0 из 2)</span>
+                    </div>
+                    <div class="tasks-content">
+                        <ul class="task-table" id="task-table">
+                            <li class="task">
+                                <a class="task-meta" id="task-meta-1">
+                                    <div class="task-icon" id="task-icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M4.646 4.646a.5.5 0 011 0L8 7.293l2.354-2.647a.5.5 0 11.707.707L8.707 8l2.647 2.354a.5.5 0 01-.707.707L8 8.707l-2.354 2.647a.5.5 0 01-.707-.707L7.293 8 4.646 5.646a.5.5 0 010-.707z"/></svg>
+                                    </div>
+                                    <div class="task-description" id="task-description">
+                                        Создай заголовок уровня 1 с текстом <code>Добро пожаловать!</code> и абзац с текстом <code>Это мой первый сайт.</code>
+                                    </div>
+                                </a>
+                            </li>
+                            <!-- <li class="task failure">
+                                <a class="task-meta" id="task-meta">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M4.646 4.646a.5.5 0 011 0L8 7.293l2.354-2.647a.5.5 0 11.707.707L8.707 8l2.647 2.354a.5.5 0 01-.707.707L8 8.707l-2.354 2.647a.5.5 0 01-.707-.707L7.293 8 4.646 5.646a.5.5 0 010-.707z"/></svg>
+                                    Добавьте класс <code>.active</code> к элементу <code>.tab-lang-edditor</code>.
+                                </a>
+                            </li> -->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="../script.js"></script>
+</body>
+</html>

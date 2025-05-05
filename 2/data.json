@@ -1,0 +1,9 @@
+{
+  "html": "",
+  "css": "",
+  "js": "",
+  "tasks": [
+      "Создай гиперссылку со ссылкой <code>https://example.com</code> и текстом <code>Текст ссылки</code>."
+  ],
+  "donehtml": "<a href='https://example.com'>Текст ссылки</a>"
+}

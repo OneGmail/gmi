@@ -1,0 +1,9 @@
+{
+  "html": "",
+  "css": "",
+  "js": "",
+  "tasks": [
+      "Создай изображение с атрибутом <code>src</code> который равен <code>https://example.com/image.jpg</code> и <code>alt</code> атрибутом который равен <code>Описание изображения</code>."
+  ],
+  "donehtml": "<img src='https://example.com/image.jpg' alt='Описание изображения'>"
+}
